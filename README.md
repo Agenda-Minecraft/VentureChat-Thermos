@@ -1,5 +1,10 @@
 # README #
 
+## DIFFERENCE BETWEEN ORIGIN
+
+This is modified version of VentureChat to be compatible with Thermos and its forks.  
+Tested on Thermos 1.7.10-1614 / KCauldron 1.7.10-1614 / Uranium 1710-dev-4-B210
+
 Read before making any changes or pull requests!
 
 ### What is this repository for?
