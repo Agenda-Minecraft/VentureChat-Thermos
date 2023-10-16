@@ -4,6 +4,7 @@
 
 This is modified version of VentureChat to be compatible with Thermos and its forks.  
 Tested on Thermos 1.7.10-1614 / KCauldron 1.7.10-1614 / Uranium 1710-dev-4-B210
+Add Jvm argument `-Dfile.encoding=UTF-8` to your server start script to avoid encoding issues.
 
 Read before making any changes or pull requests!
 
