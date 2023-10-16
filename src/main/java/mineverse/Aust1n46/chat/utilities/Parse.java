@@ -28,11 +28,6 @@ public class Parse {
                     stack.push(currentElement.getAsJsonArray().get(i));
                 }
             } else if (currentElement.isJsonObject()) {
-                if (currentElement.getAsJsonObject().has("text")) {
-                    if (currentElement.getAsJsonObject().get("text").getAsString().equals(" [鉁揮")) {
-                        continue;
-                    }
-                }
                 JsonObject object = currentElement.getAsJsonObject();
                 if (object.has("color")) {
                     String color = object.get("color").getAsString();
