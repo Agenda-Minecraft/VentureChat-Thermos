@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import mineverse.Aust1n46.chat.utilities.Parse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -431,11 +432,11 @@ public class MineverseChat extends JavaPlugin implements PluginMessageListener {
 						if(getConfig().getBoolean("ignorechat", false)) {
 							if(!p.getIgnores().contains(senderUUID)) {
 								// System.out.println("Chat sent");
-								Format.sendPacketPlayOutChat(p.getPlayer(), packet);							
+								Format.sendPacketPlayOutChat(p.getPlayer(), Parse.parseJsonToMessage(json));
 							}
 							continue;
 						}
-						Format.sendPacketPlayOutChat(p.getPlayer(), packet);	
+						Format.sendPacketPlayOutChat(p.getPlayer(), Parse.parseJsonToMessage(json));
 					}
 				}
 			}
@@ -457,7 +458,7 @@ public class MineverseChat extends JavaPlugin implements PluginMessageListener {
 					if(p.isListening(chatChannelObj.getName())) {
 						String finalJSON = Format.formatModerationGUI(json, p.getPlayer(), "Discord", chatChannelObj.getName(), hash);
 						PacketContainer packet = Format.createPacketPlayOutChat(finalJSON);
-						Format.sendPacketPlayOutChat(p.getPlayer(), packet);
+						Format.sendPacketPlayOutChat(p.getPlayer(), Parse.parseJsonToMessage(json));
 					}
 				}	
 			}

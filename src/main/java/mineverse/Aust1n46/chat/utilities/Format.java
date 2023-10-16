@@ -456,9 +456,10 @@ public class Format {
             container.getModifier().writeDefaults();
             container.getChatComponents().write(0, component);
         } else {
-            container = new PacketContainer(PacketType.Play.Server.SYSTEM_CHAT);
-            container.getStrings().write(0, json);
-            container.getIntegers().write(0, 1);
+            WrappedChatComponent component = WrappedChatComponent.fromJson(json);
+            container = new PacketContainer(PacketType.Play.Server.CHAT);
+            container.getModifier().writeDefaults();
+            container.getChatComponents().write(0, component);
         }
         return container;
     }
@@ -479,6 +480,10 @@ public class Format {
             container.getIntegers().write(0, 1);
         }
         return container;
+    }
+
+    public static void sendPacketPlayOutChat(Player player, String msg) {
+        player.sendMessage(msg);
     }
 
     public static void sendPacketPlayOutChat(Player player, PacketContainer packet) {
@@ -564,11 +569,12 @@ public class Format {
     public static String toPlainText(Object o, Class<?> c) {
         List<Object> finalList = new ArrayList<>();
         StringBuilder stringbuilder = new StringBuilder();
+
         try {
             splitComponents(finalList, o, c);
             for (Object component : finalList) {
                 if (VersionHandler.is1_7()) {
-                    stringbuilder.append((String) component.getClass().getMethod("e").invoke(component));
+                    stringbuilder.append((String) component.getClass().getMethod("func_150261_e").invoke(component));
                 } else if (VersionHandler.is1_8() || VersionHandler.is1_9() || VersionHandler.is1_10() || VersionHandler.is1_11() || VersionHandler.is1_12() || VersionHandler.is1_13() || VersionHandler.is1_14() || VersionHandler.is1_15() || VersionHandler.is1_16() || VersionHandler.is1_17()) {
                     stringbuilder.append((String) component.getClass().getMethod("getText").invoke(component));
                 } else {

@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Set;
 
+import mineverse.Aust1n46.chat.utilities.Parse;
 import net.essentialsx.api.v2.services.discord.DiscordService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -528,7 +529,7 @@ public class ChatListener implements Listener {
 			for(Player p : recipients) {
 				String json = Format.formatModerationGUI(globalJSON, p, mcp.getName(), channel.getName(), hash);
 				PacketContainer packet = Format.createPacketPlayOutChat(json);
-				Format.sendPacketPlayOutChat(p, packet);
+				Format.sendPacketPlayOutChat(p, Parse.parseJsonToMessage(json));
 			}
 			Bukkit.getConsoleSender().sendMessage(consoleChat);
 			return;
